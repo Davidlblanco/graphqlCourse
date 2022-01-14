@@ -3,21 +3,29 @@ import { ApolloServer, gql } from 'apollo-server'
 const server = new ApolloServer({
     typeDefs: gql`
     type Query{
-        id: ID
-        name : String
-        age : Int
-        average : Float
-        maried:Boolean!
-        arrayString:[String]
+        user: User
+        users:[User]
+    }, type User{
+        id: ID!
+        userName:String
     }`,
     resolvers: {
         Query: {
-            id: () => '349583905-dfdgidojoi-dfgidjgod',
-            name: () => 'name',
-            age: () => 30,
-            average: () => 50.55,
-            maried: () => false,//whei it takes ! in the types above resolver cant return null
-            arrayString: () => ['a', 'b']
+            user: () => {
+                return {
+                    id: '349583905-dfdgidojoi-dfgidjgod',
+                    userName: 'james'
+                }
+            },
+            users: () => {
+                return [{
+                    id: 'ewfewfef-dfdgidojoi-dfgidjgod',
+                    userName: 'james'
+                }, {
+                    id: '349583905-dfdgidojoi-dfgidjgod',
+                    userName: 'samantha'
+                }]
+            },
         },
     }
 });
